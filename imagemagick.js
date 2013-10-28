@@ -280,7 +280,7 @@ exports.crop = function (options, callback) {
     throw new TypeError("No srcPath or data defined");
   if (!options.height && !options.width)
     throw new TypeError("No width or height defined");
-  
+
   if (options.srcPath){
     var args = options.srcPath;
   } else {
@@ -350,6 +350,7 @@ exports.resizeArgs = function(options) {
     filter: 'Lagrange',
     sharpening: 0.2,
     customArgs: [],
+    autoorient: false,
     timeout: 0
   }
 
@@ -382,6 +383,9 @@ exports.resizeArgs = function(options) {
   }
   if (opt.strip) {
     args.push('-strip');
+  }
+  if (opt.autoorient) {
+    args.push('-auto-orient');
   }
   if (opt.width || opt.height) {
     args.push('-resize');
